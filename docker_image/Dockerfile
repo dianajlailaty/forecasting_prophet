@@ -74,4 +74,5 @@ RUN rm -rf ~/.cache/pip
 #-------------------------
 RUN git clone https://github.com/dianajlailaty/forecasting_prophet.git
 RUN chmod +x /morphemic_project/forecasting_prophet/prophet/main.py
-ENTRYPOINT python /morphemic_project/forecasting_prophet/prophet/main.py >> /morphemic_project/forecasting_prophet/logs/prophet.log
+RUN mkdir /logs
+CMD python /morphemic_project/forecasting_prophet/prophet/main.py > /logs/prophet.log 2>&1
