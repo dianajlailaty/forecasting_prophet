@@ -85,7 +85,7 @@ def worker(self,body,metric):
                 
                 
                 
-                self.connector.send_to_topic('intermediate_prediction.prophet.'+metric, m) 
+                self.connector.send_to_topic('intermediate_prediction.prophet.'+metric, message) 
                 prediction_time=prediction_time + prediction_horizon
             epoch_start = epoch_start+ prediction_horizon
             sleep(prediction_horizon)
