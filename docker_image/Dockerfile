@@ -72,6 +72,6 @@ RUN python -m pip install py4j==0.10.8.1
 RUN rm -rf ~/.cache/pip
 #Clone the prophet forecaster code
 #-------------------------
-RUN git clone -b prophet-diana https://github.com/dianajlailaty/morphemic_integration.git
-RUN chmod +x /morphemic_project/morphemic_integration/forecasting_prophet/main.py
+RUN git clone https://github.com/dianajlailaty/morphemic_integration.git
+RUN chmod +x /morphemic_project/forecasting_prophet/prophet/main.py
 #ENTRYPOINT python /morphemic_project/morphemic_integration/forecasting_prophet/main.py >> /morphemic_project/morphemic_integration/forecasting_prophet/logs/prophet.log
