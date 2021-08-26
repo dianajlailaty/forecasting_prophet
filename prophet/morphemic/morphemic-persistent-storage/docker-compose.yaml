@@ -1,0 +1,32 @@
+version: '2'
+
+services:
+
+  prophet:
+    image: gitlab.ow2.org:4567/melodic/morphemic-preprocessor/prophet:morphemic-rc1.5
+    #image: activeeon/morphemic
+    network_mode: bridge
+    container_name: prophet
+    env_file:
+      - variables.env
+    
+
+      
+  gluonts:
+    image: gitlab.ow2.org:4567/melodic/morphemic-preprocessor/gluonmachines:morphemic-rc1.5
+    #image: activeeon/morphemic
+    network_mode: bridge
+    container_name: gluonmachines
+    env_file:
+      - variables.env
+    volumes:
+      - /logs:/morphemic_project/morphemic_integration/forecasting_prophet/logs
+    
+
+  #prometheus:
+  #  image: prom/prometheus
+  #  ports:
+  #    - 9090:9090
+  #  container_name: prometheus
+  #  volumes:
+  #  - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
