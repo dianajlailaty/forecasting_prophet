@@ -28,7 +28,7 @@ models = dict()
 flags = {'avgResponseTime':0 , 'memory': 0}
 metrics_processes=dict()
 metrics = set()
-directory_path = "morphemic_project/morphemic_integration/forecasting_prophet/"
+directory_path = "morphemic_project/forecasting_prophet/prophet/"
 
 def worker(self,body,metric):
     
