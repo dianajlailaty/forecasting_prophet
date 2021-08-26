@@ -27,7 +27,7 @@ import json
 import os
 import math
 
-directory_path = "morphemic_project/morphemic_integration/forecasting_prophet/"
+directory_path = "morphemic_project/forecasting_prophet/prophet/"
 
 def train(metric):
     #loading the dataset
