@@ -166,7 +166,9 @@ def train(metric):
         probs[metric] = prob
 
     #writing probabilities in a file
+    f = open(directory_path+'prob_file.npy', "w")
     np.save(directory_path+'prob_file.npy', probs) 
+    f.close()
     return final_model
         
 def predict(model , number_of_forward_predictions , prediction_horizon , epoch_start):
