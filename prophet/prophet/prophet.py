@@ -166,7 +166,8 @@ def train(metric):
         probs[metric] = prob
 
     #writing probabilities in a file
-    f = open(directory_path+'prob_file.npy', "w")
+    npy_filename= directory_path+'prob_file.npy'
+    f = open(npy_filename, "w")
     np.save(directory_path+'prob_file.npy', probs) 
     f.close()
     return final_model
