@@ -32,7 +32,7 @@ directory_path = "/morphemic_project/forecasting_prophet/prophet/"
 def train(metric):
     #loading the dataset
     #filename=os.environ.get("APP_NAME")
-    data_path = os.path.join(os.environ.get("DATA_PATH", "./"), f'{os.environ.get("APP_NAME", "default_application")}.csv')
+    data_path = os.path.join(directory_path, f'{os.environ.get("APP_NAME", "default_application")}.csv')
 
     dataset= pd.read_csv(data_path)
   
