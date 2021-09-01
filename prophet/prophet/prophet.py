@@ -34,7 +34,7 @@ def train(metric):
     #filename=os.environ.get("APP_NAME")
     data_path = os.path.join(os.environ.get("DATA_PATH", "./"), f'{os.environ.get("APP_NAME", "default_application")}.csv')
 
-    dataset= pd.read_csv(data_path + ".csv")
+    dataset= pd.read_csv(data_path)
   
     #changing the names and the format of the attributes
     prophet_dataset= pd.DataFrame()
