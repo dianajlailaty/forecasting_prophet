@@ -32,11 +32,9 @@ directory_path = "/morphemic_project/forecasting_prophet/prophet/"
 def train(metric):
     #loading the dataset
     #filename=os.environ.get("APP_NAME")
-    #data_path = os.path.join(os.environ.get("DATA_PATH", "./"), f'{os.environ.get("APP_NAME", "demo")}.csv')
-    data_path = os.environ.get("DATA_PATH")
-
+    data_file_path = os.path.join(os.environ.get("DATA_PATH", "./"), f'{os.environ.get("APP_NAME", "demo")}.csv')
     #dataset= pd.read_csv("/morphemic_project/forecasting_prophet/prophet/default_application.csv")
-    dataset = pd.read_csv(data_path)
+    dataset = pd.read_csv(data_file_path)
   
     #changing the names and the format of the attributes
     prophet_dataset= pd.DataFrame()
