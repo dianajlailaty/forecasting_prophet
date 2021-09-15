@@ -30,10 +30,7 @@ import math
 directory_path = "/morphemic_project/forecasting_prophet/prophet/"
 
 def train(metric):
-    #loading the dataset
-    #filename=os.environ.get("APP_NAME")
     data_file_path = os.path.join(os.environ.get("DATA_PATH", "./"), f'{os.environ.get("APP_NAME", "demo")}.csv')
-    #dataset= pd.read_csv("/morphemic_project/forecasting_prophet/prophet/default_application.csv")
     dataset = pd.read_csv(data_file_path)
   
     #changing the names and the format of the attributes
@@ -52,12 +49,8 @@ def train(metric):
     size = len(prophet_dataset)
     
     logging.debug("STARTED TRAINING FOR: "+ metric)
-
-    #splitting to train and test
-    #test_percentage=0.2
-    #training_window_size=int(len(prophet_dataset)-(len(prophet_dataset)*test_percentage))
     train=prophet_dataset[:size]
-    #test=prophet_dataset[training_window_size:]
+  
     
     #hyperparameter tuning and cross validation
     #should be generic
@@ -76,9 +69,6 @@ def train(metric):
     logging.debug(horizon)
     logging.debug(period)
     
-    #initial = '10 minutes'
-    #period = '5 minutes'
-    #horizon = prediction_horizon
     '''
     changepoint_prior_scale  = [0.1,0.2,0.3,0.4,0.5]
     n_changepoints = [15,20,25]
@@ -157,7 +147,6 @@ def train(metric):
                      #mcmc_samples = parameters['mcmc_samples'][0]
                       )
     final_model.fit(train)
-    #probabilities[metric] = prob
     #checking if probabilities file exist
     if(os.path.isfile(directory_path+'prob_file.npy')):
         probs = np.load(directory_path+'prob_file.npy',allow_pickle='TRUE').item()
