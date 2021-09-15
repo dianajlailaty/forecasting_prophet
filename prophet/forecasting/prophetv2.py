@@ -31,8 +31,7 @@ metrics = set()
 directory_path = "/morphemic_project/forecasting_prophet/prophet/"
 
 def worker(self,body,metric):
-    
-    #logging.debug("Forecasting metric: " + metric)
+
     timestamp = body['timestamp']
     prediction_horizon = body["prediction_horizon"]
     number_of_forward_predictions = body["number_of_forward_predictions"]   
@@ -94,16 +93,9 @@ def worker(self,body,metric):
 class Prophet(morphemic.handler.ModelHandler,messaging.listener.MorphemicListener):
     id = "prophet"
     metrics = set()
-    #probabilities = dict()
 
     def __init__(self):
         self._run =  False
-        logging.debug(ACTIVEMQ_USER)
-        logging.debug(ACTIVEMQ_PASSWORD)
-        logging.debug(ACTIVEMQ_HOSTNAME)
-        logging.debug(ACTIVEMQ_PORT)
-        #sleep(90)
-        #logging.debug("slept 90 seconds")
         self.connector = messaging.morphemic.Connection(ACTIVEMQ_USER,ACTIVEMQ_PASSWORD, host=ACTIVEMQ_HOSTNAME, port=ACTIVEMQ_PORT)
         #self.connector = messaging.morphemic.Connection('morphemic','morphemic', host='147.102.17.76', port=61616)
         #self.model = morphemic.model.Model(self)
@@ -135,8 +127,6 @@ class Prophet(morphemic.handler.ModelHandler,messaging.listener.MorphemicListene
                 metrics_processes[metric] .start()
 
     def on_metrics_to_predict(self, body):
-        logging.debug("check the trained model for :") 
-        logging.debug(body) 
         #getting data from datasetmaker
         dataset_preprocessor = CSVData(APP_NAME,start_collection='2h')
         dataset_preprocessor.prepare_csv()
@@ -151,7 +141,6 @@ class Prophet(morphemic.handler.ModelHandler,messaging.listener.MorphemicListene
                 pkl_path = directory_path+"models/prophet_"+metric+".pkl"
                 with open(pkl_path, "wb") as f:
                     pickle.dump(model, f)
-                #flags[metric]=1
             metrics.add(metric)
         
         self.connector .send_to_topic("training_models",
