@@ -43,9 +43,9 @@ def worker(self,body,metric):
         logging.debug("Loading the trained model for metric: " + metric)
 
     while(True):
-        if flags[metric] == 0:
-            epoch_start = predictionTimes[metric]
-            flags[metric] = 1
+        #if flags[metric] == 0:
+            #epoch_start = predictionTimes[metric]
+            #flags[metric] = 1
             #load the model
         with open(directory_path+"models/prophet_"+metric+".pkl", 'rb') as f:
             models[metric] = pickle.load(f)
