@@ -25,7 +25,7 @@ ACTIVEMQ_PORT = os.environ.get("ACTIVEMQ_PORT")
 
 predictionTimes = dict()
 models = dict()
-flags = {'avgResponseTime':0 , 'memory': 0}
+#flags = {'avgResponseTime':0 , 'memory': 0}
 metrics_processes=dict()
 metrics = set()
 directory_path = "/morphemic_project/forecasting_prophet/prophet/"
