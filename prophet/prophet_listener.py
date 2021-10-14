@@ -1,6 +1,6 @@
 import messaging
 import morphemic
-from prophet import prophet
+import prophet_forecaster
 from time import time
 import logging
 import signal
@@ -51,7 +51,7 @@ def worker(self,body,metric):
             models[metric] = pickle.load(f)
         timestamp = int(time())   
         if (timestamp >= predictionTimes[metric]):
-            predictions=prophet.predict(models[metric] , number_of_forward_predictions , prediction_horizon , epoch_start)
+            predictions=prophet_forecaster.predict(models[metric] , number_of_forward_predictions , prediction_horizon , epoch_start)
             yhats = predictions['yhat'].values.tolist()
             yhat_lowers = predictions['yhat_lower'].values.tolist()
             yhat_uppers = predictions['yhat_upper'].values.tolist()
@@ -97,9 +97,7 @@ class Prophet(morphemic.handler.ModelHandler,messaging.listener.MorphemicListene
     def __init__(self):
         self._run =  False
         self.connector = messaging.morphemic.Connection(ACTIVEMQ_USER,ACTIVEMQ_PASSWORD, host=ACTIVEMQ_HOSTNAME, port=ACTIVEMQ_PORT)
-        #self.connector = messaging.morphemic.Connection('morphemic','morphemic', host='147.102.17.76', port=61616)
-        #self.model = morphemic.model.Model(self)
-
+        
     def run(self):
         logging.debug("setting up")
         self.connector.connect()
@@ -137,7 +135,7 @@ class Prophet(morphemic.handler.ModelHandler,messaging.listener.MorphemicListene
         #for metric in metrics:
             if not os.path.isfile(directory_path+'models/prophet_'+metric+".pkl"): 
                 logging.debug("Training a Prophet model for metric : " + metric)
-                model=prophet.train(metric)
+                model=prophet_forecaster.train(metric)
                 pkl_path = directory_path+"models/prophet_"+metric+".pkl"
                 with open(pkl_path, "wb") as f:
                     pickle.dump(model, f)
