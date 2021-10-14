@@ -1,10 +1,10 @@
 import logging
-from forecasting import prophetv2
+from listener import prophet_listener
 
 logger = logging.getLogger()
 logger.setLevel(logging.DEBUG)
 
-e = prophetv2.Prophet()
+e = prophet_listener.Prophet()
 #try:
 #    e.start()
 #except KeyboardInterrupt:
