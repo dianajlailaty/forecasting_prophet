@@ -1,0 +1,14 @@
+stomp.py
+influxdb
+filelock
+python-slugify
+scikit-learn
+pandas
+numpy
+scipy
+convertdate
+lunarcalendar
+holidays
+tqdm
+pystan==2.19.1.1
+fbprophet
