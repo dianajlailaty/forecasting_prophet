@@ -1,5 +1,5 @@
 import logging
-from listener import prophet_listener
+from prophet import prophet_listener
 
 logger = logging.getLogger()
 logger.setLevel(logging.DEBUG)
