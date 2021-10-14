@@ -16,6 +16,6 @@ RUN cd /var/lib/morphemic/ \
     && cd ../.. \
     && cp -R /var/lib/morphemic/morphemic-preprocessor-morphemic-rc1.5/amq-message-python-library /morphemic_project/forecasting-prophet/prophet/messaging \
     && rm -rf /var/lib/morphemic \
-    && mkdir -p /logs
+    && mkdir -p /logs && mkdir /morphemic_project/forecasting-prophet/prophet/models
 
  CMD python /morphemic_project/forecasting-prophet/prophet/main.py > /logs/prophet.log 2>&1
