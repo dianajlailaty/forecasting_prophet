@@ -3,49 +3,26 @@ WORKDIR /morphemic_project
 RUN apt-get clean && apt-get update -y -qq
 RUN apt-get install -y --no-install-recommends apt-utils
 RUN python -m pip install --upgrade pip
-RUN apt-get install -y \
-        build-essential \
-        cmake \
-        pkg-config \
-        wget \
-        swig \
-        git \
-        curl \
-        unzip \
-        libaio1 \
-        nano \
-        freetds-dev \
-        unixodbc \
-        unixodbc-dev \
-        libjpeg-dev \
-        libtiff5-dev \
-        libpng-dev \
-        libgtk2.0-dev \
-        libavcodec-dev \
-        libavformat-dev \
-        libswscale-dev \
-        libv4l-dev \
-        libatlas-base-dev \
-        gfortran \
-        libhdf5-dev \
-        libtbb2 \
-        libtbb-dev \
-        libgl1-mesa-glx
         
-COPY requirements.txt .
-RUN pip3 install --no-cache-dir -r requirements.txt
+# Install dev & build packages
+RUN apt-get install python-dev build-essential -y
+
+# Install deps now to avoid misleading error messages which are actually non-errors at the next step
+RUN pip install convertdate lunarcalendar holidays cython pystan==2.19.1.1 pandas lumpy stomp.py filelock python-slugify fbprophet influxdb 
+
+RUN pip install scikit-learn
 
 ADD https://gitlab.ow2.org/melodic/morphemic-preprocessor/-/archive/morphemic-rc1.5/morphemic-preprocessor-morphemic-rc1.5.tar.gz /var/lib/morphemic/
 
-COPY forecasting-prophet/ ./
+COPY forecasting_prophet/ ./
 
 RUN cd /var/lib/morphemic/ \
     && tar -zxf morphemic-preprocessor-morphemic-rc1.5.tar.gz \
     && cd morphemic-preprocessor-morphemic-rc1.5 \
     && cd morphemic-datasetmaker && python3 setup.py install \ 
     && cd ../.. \
-    && cp -R /var/lib/morphemic/morphemic-preprocessor-morphemic-rc1.5/amq-message-python-library /morphemic_project/forecasting-prophet/prophet/messaging \
+    && cp -R /var/lib/morphemic/morphemic-preprocessor-morphemic-rc1.5/amq-message-python-library /morphemic_project/messaging \
     && rm -rf /var/lib/morphemic \
-    && mkdir -p /logs && mkdir /morphemic_project/forecasting-prophet/prophet/models
+    && mkdir -p /logs && mkdir /morphemic_project/models
 
- CMD python /morphemic_project/forecasting-prophet/prophet/main.py > /logs/prophet.log 2>&1
+CMD python /morphemic_project/main.py > /logs/prophet.log 2>&1
