@@ -3,7 +3,36 @@ WORKDIR /morphemic_project
 RUN apt-get clean && apt-get update -y -qq
 RUN apt-get install -y --no-install-recommends apt-utils
 RUN python -m pip install --upgrade pip
+RUN apt-get install -y \
+        build-essential \
+        cmake \
+        pkg-config \
+        wget \
+        swig \
+        git \
+        curl \
+        unzip \
+        libaio1 \
+        nano \
+        freetds-dev \
+        unixodbc \
+        unixodbc-dev \
+        libjpeg-dev \
+        libtiff5-dev \
+        libpng-dev \
+        libgtk2.0-dev \
+        libavcodec-dev \
+        libavformat-dev \
+        libswscale-dev \
+        libv4l-dev \
+        libatlas-base-dev \
+        gfortran \
+        libhdf5-dev \
+        libtbb2 \
+        libtbb-dev \
+        libgl1-mesa-glx
         
+
 # Install dev & build packages
 RUN apt-get install python-dev build-essential -y
 
