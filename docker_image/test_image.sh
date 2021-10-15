@@ -1,0 +1,1 @@
+docker run -t --env-file=variables.env --network=bridge $image_name

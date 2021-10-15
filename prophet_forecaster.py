@@ -2,9 +2,6 @@ import pandas as pd
 import numpy as np
 import logging
 import itertools
-import matplotlib.pyplot as plt
-import plotly.offline as pyoff
-import plotly.graph_objs as go
 from sklearn import preprocessing
 from fbprophet import Prophet
 from fbprophet.plot import add_changepoints_to_plot
@@ -18,7 +15,6 @@ from math import exp
 pd.set_option('display.max_row', 500)
 import itertools
 from sklearn.model_selection import ParameterGrid
-#from dataset_maker import CSVData
 from time import time
 from datetime import datetime
 import ast
@@ -27,7 +23,7 @@ import json
 import os
 import math
 
-directory_path = "/morphemic_project/forecasting_prophet/prophet/"
+directory_path = "/morphemic_project/"
 
 def train(metric):
     data_file_path = os.path.join(os.environ.get("DATA_PATH", "./"), f'{os.environ.get("APP_NAME", "demo")}.csv')
