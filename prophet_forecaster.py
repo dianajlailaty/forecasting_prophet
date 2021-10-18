@@ -31,7 +31,7 @@ def train(metric):
   
     #changing the names and the format of the attributes
     prophet_dataset= pd.DataFrame()
-    prophet_dataset['ds'] = dataset["time"]
+    prophet_dataset['ds'] = dataset["ems_time"]
     prophet_dataset['y']=dataset[metric]
     prophet_dataset['y'] = pd.to_numeric(prophet_dataset['y'], errors='coerce')
     for  i in range (0,len(prophet_dataset['ds'])):
@@ -50,8 +50,8 @@ def train(metric):
     
     #hyperparameter tuning and cross validation
     #should be generic
-    t1 = dataset['time'][0]
-    t2 = dataset['time'][size-1]
+    t1 = dataset['ems_time'][0]
+    t2 = dataset['ems_time'][size-1]
     timeDiffInSec = int(t2-t1)
     timeDiffInMin = timeDiffInSec/60
     
