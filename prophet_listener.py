@@ -132,9 +132,9 @@ class Prophet(morphemic.handler.ModelHandler,messaging.listener.MorphemicListene
 
     def on_metrics_to_predict(self, body):
         #getting data from datasetmaker
-        #dataset_preprocessor = CSVData(APP_NAME,start_collection='2h')
-        #dataset_preprocessor.prepare_csv()
-        #logging.debug("DATASET DOWNLOADED")
+        dataset_preprocessor = CSVData(APP_NAME,start_collection='2h')
+        dataset_preprocessor.prepare_csv()
+        logging.debug("DATASET DOWNLOADED")
         
         for r in body:
             metric = r['metric']
