@@ -54,4 +54,5 @@ RUN cd /var/lib/morphemic/ \
     && rm -rf /var/lib/morphemic \
     && mkdir -p /logs && mkdir /morphemic_project/models
 
-CMD python /morphemic_project/main.py > /logs/prophet.log 2>&1
+CMD ["python3","/morphemic_project/main.py"]
+ 

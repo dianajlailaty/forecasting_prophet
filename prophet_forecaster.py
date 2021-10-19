@@ -22,8 +22,10 @@ import pickle
 import json
 import os
 import math
+import logging.config
 
 directory_path = "/morphemic_project/"
+#logging.config.fileConfig('logging.ini', disable_existing_loggers=False)
 
 def train(metric):
     data_file_path = os.path.join(os.environ.get("DATA_PATH", "./"), f'{os.environ.get("APP_NAME", "demo")}.csv')
