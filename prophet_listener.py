@@ -1,20 +1,26 @@
 import messaging
 import morphemic
 import prophet_forecaster
-from time import time
 import logging
 import signal
 import threading
 import numpy as np
+import sys
 
 # Libraries required for training and prediction
 import os
 import json
 import pickle
 import ast
+import logging.config
+from stomp import exception
+from time import time
 from time import sleep
 from dataset_maker import CSVData
 from multiprocessing import Process
+
+
+#logging.config.fileConfig('logging.ini', disable_existing_loggers=False)
 
 
 APP_NAME = os.environ.get("APP_NAME")
@@ -97,7 +103,7 @@ class Prophet(morphemic.handler.ModelHandler,messaging.listener.MorphemicListene
     def __init__(self):
         self._run =  False
         self.connector = messaging.morphemic.Connection(ACTIVEMQ_USER,ACTIVEMQ_PASSWORD, host=ACTIVEMQ_HOSTNAME, port=ACTIVEMQ_PORT)
-        
+
     def run(self):
         logging.debug("setting up")
         self.connector.connect()
@@ -164,7 +170,10 @@ class Prophet(morphemic.handler.ModelHandler,messaging.listener.MorphemicListene
 
     def start(self):
         logging.debug("Staring Prophet Forecaster")
-        self.run()
+        try:
+            self.run()
+        except exception.ConnectFailedException:
+            logging.error("Failed to connect to ActiveMQ. Please check your connection settings.")
         self._run = True 
 
     def on_disconnected(self):
